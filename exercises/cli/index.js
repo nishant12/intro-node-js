@@ -1,8 +1,8 @@
 // install any missing modules
 const program = require('commander')
 const { prompt } = require('inquirer')
-const {newContactPrompts} = require('./prompts')
-const {getContacts, saveContacts} = require('./utils')
+const { newContactPrompts } = require('./prompts')
+const { getContacts, saveContacts } = require('./utils')
 
 program
   .version('0.0.1')
@@ -14,10 +14,10 @@ program
   .description('add a new contact')
   .action(() => {
     prompt(newContactPrompts)
-      .then(({firstName, lastName, phoneNumber}) => {
+      .then(({ firstName, lastName, phoneNumber }) => {
         const key = firstName + ' ' + lastName
         const contacts = getContacts()
-        contacts[key] = {firstName, lastName, phoneNumber}
+        contacts[key] = { firstName, lastName, phoneNumber }
         saveContacts(contacts)
       })
   })
@@ -36,7 +36,7 @@ program
         choices: Object.keys(contacts)
       }
     ])
-      .then(({selected}) => {
+      .then(({ selected }) => {
         const contact = contacts[selected]
         console.log(JSON.stringify(contact, null, 2))
       })
